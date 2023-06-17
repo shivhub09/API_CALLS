@@ -28,12 +28,19 @@ class _HomePageState extends State<HomePage> {
             final email = user['email'];
             final name = user['name']['first'];
             final imageurl = user['picture']['thumbnail'];
-            return ListTile(
-              leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Image.network(imageurl)),
-              subtitle: Text(email),
-              title: Text(name.toString()),
+            return Container(
+              child: Column(
+                children: [
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Image.network(imageurl)),
+
+                  Text(name),
+                  Text(email),
+                ],
+
+                
+              ),
             );
           })),
     );
