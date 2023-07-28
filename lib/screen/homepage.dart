@@ -37,6 +37,9 @@ class _HomePageState extends State<HomePage> {
                 ? Colors.blue.shade100
                 : Colors.pink.shade100;
             return ListTile(
+              leading: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.network(user.picture.medium)),
               title: Text(user.username.first),
               subtitle: Text(user.location.coordinates.latitude),
               tileColor: color,
