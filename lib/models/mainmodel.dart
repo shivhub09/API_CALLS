@@ -1,3 +1,5 @@
+import 'package:basic_api_calling/models/datemodel.dart';
+import 'package:basic_api_calling/models/user_location.dart';
 import 'package:basic_api_calling/models/username.dart';
 
 class User {
@@ -7,6 +9,8 @@ class User {
   final String cell;
   final String nat;
   final UserName username;
+  final userDob dateofbirth;
+  final userLocation location;
 
   User(
       {required this.gender,
@@ -14,7 +18,9 @@ class User {
       required this.phone,
       required this.cell,
       required this.nat,
-      required this.username});
+      required this.username,
+      required this.dateofbirth,
+      required this.location});
 
   String get fullName {
     return '${username.title} ${username.first} ${username.last}';
