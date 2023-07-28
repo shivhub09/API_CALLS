@@ -35,8 +35,8 @@ class _HomePageState extends State<HomePage> {
                 ? Colors.blue.shade100
                 : Colors.pink.shade100;
             return ListTile(
-              title: Text(email),
-              subtitle: Text(user.phone),
+              title: Text(user.username.first),
+              subtitle: Text(user.email),
               tileColor: color,
             );
           })),
@@ -52,12 +52,18 @@ class _HomePageState extends State<HomePage> {
     final json = jsonDecode(body);
     final results = json["results"] as List<dynamic>;
     final transformed = results.map((e) {
+      final name = UserName(
+          title: e["name"]["title"],
+          first: e["name"]["first"],
+          last: e["name"]["last"]);
       return User(
-          gender: e['gender'],
-          email: e['email'],
-          cell: e['cell'],
-          nat: e['nat'],
-          phone: e["phone"]);
+        gender: e['gender'],
+        email: e['email'],
+        cell: e['cell'],
+        nat: e['nat'],
+        phone: e["phone"],
+        username: name,
+      );
     }).toList();
     setState(() {
       users = transformed;
