@@ -17,28 +17,7 @@ class UserApi {
     final json = jsonDecode(body);
     final results = json["results"] as List<dynamic>;
     final final_users = results.map((e) {
-      final name = UserName(
-          title: e["name"]["title"],
-          first: e["name"]["first"],
-          last: e["name"]["last"]); 
-      final coordinates = LocationCoordinate(latitude: e['location']['coordinates']['latitude'], longitude: e['location']['coordinates']['longitude']);
-      final birth = userDob(date: DateTime.parse(e['dob']['date']), age: e['dob']['age']);
-      final street = LocationStreet(number: e['location']['street']['number'], name: e['location']['street']['name']);
-      final timezone = LocationTimeZoneCoordinate(offset: e['location']['timezone']['offset'], description:  e['location']['timezone']['description']);
-      final location = userLocation(city: e['location']['city'], state: e['location']['state'], country: e['location']['country'], 
-       postcode:e['location']['postcode'].toString(), street: street, coordinates: coordinates, timezone: timezone);
-
-
-      return User(
-        gender: e['gender'],
-        email: e['email'],
-        cell: e['cell'],
-        nat: e['nat'],
-        phone: e["phone"],
-        username: name,
-        dateofbirth: birth,
-        location: location
-      );
+      return User.fromMap(e);
     }).toList();
 
     // print(users);

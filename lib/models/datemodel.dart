@@ -3,5 +3,8 @@ class userDob {
 
   final int age;
 
-  userDob({required this.date, required this.age});
+  userDob({
+    required this.date,
+    required this.age
+  });
 }

@@ -15,6 +15,9 @@ class userLocation {
       required this.street,
       required this.coordinates,
       required this.timezone});
+
+
+      
 }
 
 class LocationStreet {

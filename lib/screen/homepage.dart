@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
                 ? Colors.blue.shade100
                 : Colors.pink.shade100;
             return ListTile(
-              title: Text(user.fullName),
+              title: Text(user.username.first),
               subtitle: Text(user.location.coordinates.latitude),
               tileColor: color,
             );
