@@ -30,17 +30,26 @@ class User {
         title: e["name"]["title"],
         first: e["name"]["first"],
         last: e["name"]["last"]);
+        
     final coordinates = LocationCoordinate(
         latitude: e['location']['coordinates']['latitude'],
         longitude: e['location']['coordinates']['longitude']);
+
+
     final birth =
         userDob(date: DateTime.parse(e['dob']['date']), age: e['dob']['age']);
+
+
     final street = LocationStreet(
         number: e['location']['street']['number'],
         name: e['location']['street']['name']);
+
+
     final timezone = LocationTimeZoneCoordinate(
         offset: e['location']['timezone']['offset'],
         description: e['location']['timezone']['description']);
+
+
     final location = userLocation(
         city: e['location']['city'],
         state: e['location']['state'],
@@ -49,6 +58,8 @@ class User {
         street: street,
         coordinates: coordinates,
         timezone: timezone);
+
+
     final picture = UserPicture(
         large: e['picture']['large'],
         medium: e['picture']['medium'],
@@ -67,7 +78,5 @@ class User {
     );
   }
 
-  String get fullName {
-    return '${username.title} ${username.first} ${username.last}';
-  }
+  
 }

@@ -25,27 +25,62 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-          itemCount: users.length,
-          itemBuilder: ((context, index) {
-            final user = users[index];
-            final email = user.email;
-            final gender = user.gender;
-            // final name = user['name']['first'];
-            // final imageurl = user['picture']['thumbnail'];
-            final color = user.gender == 'male'
-                ? Colors.blue.shade100
-                : Colors.pink.shade100;
-            return ListTile(
-              leading: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.network(user.picture.medium)),
-              title: Text(user.username.first),
-              subtitle: Text(user.location.coordinates.latitude),
-              tileColor: color,
-            );
-          })),
-    );
+        body: GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2, // Number of items in each row
+        crossAxisSpacing: 0.0,
+        mainAxisSpacing: 10.0, // Spacing between rows
+      ),
+      itemCount: users.length,
+      itemBuilder: (context, index) {
+        final user = users[index];
+        final color =
+            user.gender == 'male' ? Colors.blue.shade100 : Colors.pink.shade100;
+        return Container(
+          padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+          margin: EdgeInsets.only(left: 10, right: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: color,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5), // Shadow color
+                spreadRadius: 2, // Spread radius
+                blurRadius: 5, // Blur radius
+                offset: Offset(0, 3), // Offset in the x, y direction
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: Image.network(user.picture.medium),
+                  ),
+                ],
+              ),
+              Flexible(
+                child: Text(
+                  "${user.username.title} ${user.username.first} ${user.username.last}",
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Flexible(
+                child: Text(
+                    "${user.location.street.number}, ${user.location.street.name}, ${user.location.city}, ${user.location.country}"),
+              ),
+              Text("${user.phone}")
+            ],
+          ),
+        );
+      },
+    ));
   }
 
   void fetchUsers() async {
